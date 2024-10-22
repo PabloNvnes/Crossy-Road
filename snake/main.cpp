@@ -1,11 +1,6 @@
 #include "window.hpp"
 
 int main(int argc, char **argv) {
-
-  /*A main permaneceu semelhante aos projetos apresentados em aula,
-    somente desativamos o contador de FPS e o botão de tela cheia.
-  */
-
   try {
     abcg::Application app(argc, argv);
 
@@ -16,13 +11,12 @@ int main(int argc, char **argv) {
       .height = 600,
       .showFPS = false,
       .showFullscreenButton = false,
-      .title = "Snake",
+      .title = "Cross the Road",
     });
 
     app.run(window);
   } catch (std::exception const &exception) {
     fmt::print(stderr, "{}\n", exception.what());
-
     return -1;
   }
 
