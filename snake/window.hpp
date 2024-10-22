@@ -1,6 +1,7 @@
 #ifndef WINDOW_HPP_
 #define WINDOW_HPP_
 
+#include <array>
 #include <random>
 
 #include "abcgOpenGL.hpp"
@@ -8,54 +9,35 @@
 
 class Window : public abcg::OpenGLWindow {
   protected:
-    void onEvent(SDL_Event const &event) override;
     void onCreate() override;
     void onUpdate() override;
     void onPaint() override;
-    void onPaintUI() override;
-    void onResize(glm::ivec2 const &size) override;
+    void onEvent(SDL_Event const &event) override;
     void onDestroy() override;
 
   private:
-    glm::ivec2 m_viewportSize{};
-
     GLuint m_VAO{};
     GLuint m_VBOColors{};
     GLuint m_VBOPositions{};
-    GLuint m_program{};
+    ImFont *m_font{};
 
     GameData m_gameData;
 
-    abcg::Timer m_timer;
+    std::array<glm::vec4, 4> m_colors{};
+    std::array<glm::vec2, 4> m_positions{};
 
-    ImFont *m_font{};
+    // Posição da pessoa (jogador)
+    float m_personX{};
+    float m_personY{};
 
-    double m_unit = 0.1;
+    // Carros: posições e velocidades
+    std::array<float, 5> m_carX{};
+    std::array<float, 5> m_carY{};
+    std::array<float, 5> m_carSpeeds{};
 
-    //Definindo variável booleana correspondente a geração da maça
-    bool generateApple;
-
-    //Definindo variáveis referentes ao tamanho da snake
-    double mx_apple;
-    double my_apple;
-
-    int ml_snake;
-
-    //Definindo tamanho que a snake terá em x/y (máx 30)
-    std::array<double, 30> mx_snake;
-    std::array<double, 30> my_snake;
-
-    std::array<glm::vec4, 20> m_colors;
-    std::array<glm::vec2, 20> m_positions;
-
-    std::default_random_engine m_randomEngine;
-
-    void drawGrid();
-    void drawApple();
-    void drawSnake();
+    void drawPerson();
+    void drawCars();
     void setupModel();
-    void play();
-    void validate();
 };
 
 #endif
