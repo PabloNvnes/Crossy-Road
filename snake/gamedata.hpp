@@ -15,11 +15,16 @@
 enum class State { Playing, GameOver, Win }; 
 
 //Definindo dispositivos de entrada/direções
-enum class Direction { Up, Down, Left, Right };
+enum class Direction { Up, Down, Left, Right }; 
+
+// Definindo movimento dos carros
+enum class CarDirection { LeftToRight, RightToLeft }; 
 
 struct GameData {
   State m_state{State::Playing};
-  Direction m_direction{Direction::Right};
+  Direction m_personDirection{Direction::Up}; // Direção do jogador (de baixo para cima)
+  std::array<CarDirection, 5> m_carDirections; // Array para representar a direção dos carros em 5 faixas (5 linhas de carros)
 };
+
 
 #endif
